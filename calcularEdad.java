@@ -6,8 +6,11 @@
 
 package edad;
 
+import java.io.BufferedWriter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.io.File;
+import java.io.FileWriter;
 /**
  *
  * @author Alberto Alarcon
@@ -29,6 +32,23 @@ public class calcularEdad {
         		// TODO Auto-generated method stub
 		// Mostramos el resultado de llamar a la función calcular pasando
 		// como parametro la fecha de nacimiento YYYY-MM-DD
+                  int edad = calcular(new GregorianCalendar(2007,03,14));
+        /* Escribe la edad en el fichero Edad*/  
+        File archivo;
+        BufferedWriter buferescritor;
+        FileWriter escritor;
+        try {
+            escritor = new FileWriter("Edad");
+            buferescritor = new BufferedWriter(escritor);
+            buferescritor.write(edad);
+            buferescritor.close();
+            escritor.close();
+            
+            
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+                  
 		System.out.println(calcular(new GregorianCalendar(2007,03,14)));
     }
         public static int calcular(Calendar fechaNac) {
@@ -36,7 +56,7 @@ public class calcularEdad {
         Calendar fechaActual = Calendar.getInstance();
         // Cálculo de las diferencias.
 
-        int años = fechaActual.get(Calendar.YEAR) - fechaNac.get(Calendar.YEAR);
+        int a�os = fechaActual.get(Calendar.YEAR) - fechaNac.get(Calendar.YEAR);
         int meses = fechaActual.get(Calendar.MONTH) - fechaNac.get(Calendar.MONTH);
         int dias = fechaActual.get(Calendar.DAY_OF_MONTH) - fechaNac.get(Calendar.DAY_OF_MONTH);
 
@@ -46,11 +66,12 @@ public class calcularEdad {
 
         if(meses < 0 // Aún no es el mes de su cumpleaños
            || (meses==0 && dias < 0)) { // o es el mes pero no ha llegado el día.
-            años--;
+            a�os--;
         }
 
-        return años;
+        return a�os;
 
     }
     
 }
+
